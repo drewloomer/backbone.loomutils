@@ -1,0 +1,20 @@
+{
+  "name": "backbone.loomutils",
+  "version": "0.0.1",
+  "homepage": "https://github.com/drewloomer/backbone.loomutils",
+  "authors": [
+    "drew@drewloomer.com"
+  ],
+  "description": "Helper utilities for Backbone.",
+  "main": "loomutils.js",
+  "keywords": [
+    "Backbone"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "*sublime*"
+  ]
+}
