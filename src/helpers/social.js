@@ -7,7 +7,7 @@ define([
 	'underscore',
 	'facebook',
 	'twitter',
-	'helpers/analytics',
+	'loomutils/helpers/analytics',
 	'config'
 ], function ($, Backbone, _, Facebook, Twitter, Analytics, Config) {
 

@@ -1,18 +1,19 @@
 /*global define*/
-'use strict';
 
 define([
 	'jquery',
 	'backbone',
 	'underscore',
-	'views/base'
-], function ($, Backbone, _, BaseView) {
+	'loomutils/views/nested'
+], function ($, Backbone, _, NestedView) {
 
-	var V = BaseView.extend({
+	'use strict';
+
+	var V = NestedView.extend({
 
 		initialize: function () {
 
-			BaseView.prototype.initialize.apply(this, arguments);
+			NestedView.prototype.initialize.apply(this, arguments);
 			this.render();
 		}
 	});

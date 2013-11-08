@@ -4,11 +4,11 @@ define([
 	'jquery',
 	'underscore',
 	'handlebars',
-	'router',
+	'loomutils/router',
 	'epoxy',
-	'helpers/loader',
-	'helpers/route-callback',
-	'models/view'
+	'loomutils/helpers/loader',
+	'loomutils/helpers/route-callback',
+	'loomutils/models/view'
 ], function ($, _, Handlebars, router, Epoxy, Loader, RouteCallback, ViewModel) {
 
 	'use strict';

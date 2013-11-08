@@ -5,16 +5,16 @@ define([
 	'jquery',
 	'backbone',
 	'underscore',
-	'views/base',
+	'loomutils/views/nested',
 	'models/photowall',
 	'templates/main',
 	'views/home/base',
 	'views/create/base',
 	'views/admin/base',
 	'views/upload/base'
-], function ($, Backbone, _, BaseView, photowall, Template, HomeView, CreateView, AdminView, UploadView) {
+], function ($, Backbone, _, NestedView, photowall, Template, HomeView, CreateView, AdminView, UploadView) {
 
-	var V = BaseView.extend({
+	var V = NestedView.extend({
 
 		/**
 		 * Template
@@ -105,7 +105,7 @@ define([
 		 */
 		initialize: function () {
 
-			BaseView.prototype.initialize.apply(this, arguments);
+			NestedView.prototype.initialize.apply(this, arguments);
 
 			this.listenTo(this.getChild('admin').get('view'), 'fileAdded', this.onFileAdded);
 		},
