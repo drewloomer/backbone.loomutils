@@ -1,5 +1,4 @@
 /*global define*/
-'use strict';
 
 define([
 	'jquery',
@@ -8,12 +7,8 @@ define([
 	'imagesLoaded'
 ], function ($, Backbone, _, imagesLoaded) {
 
-	/**
-	 * ## Assets Helper
-	 *
-	 * Helper methods for loading various types of assets and triggering
-	 * related events
-	 */
+	'use strict';
+
 	var L = Backbone.Model.extend({
 
 		/**

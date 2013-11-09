@@ -1,5 +1,4 @@
 /*global define*/
-'use strict';
 
 define([
 	'jquery',
@@ -7,23 +6,33 @@ define([
 	'underscore',
 	'facebook',
 	'twitter',
-	'loomutils/helpers/analytics',
-	'config'
-], function ($, Backbone, _, Facebook, Twitter, Analytics, Config) {
+	'loomutils/helpers/analytics'
+], function ($, Backbone, _, Facebook, Twitter, Analytics) {
+
+	'use strict';
 
 	var S = function () {
-		this.initialize();
+		this.initialize.apply(this, arguments);
 	};
 
 	_.extend(S.prototype, Backbone.Events, {
+
+		/**
+		 * The configuration
+		 * @type {Object}
+		 */
+		config: {},
+
 
 		/**
 		 * Initialize the local storage
 		 */
 		initialize: function () {
 
+			this.config = params.config || {};
+
 			Facebook.init({
-				'appId': Config.facebook.appID,
+				'appId': this.config.facebook.appID,
 				'xfbml': true
 			});
 
@@ -40,10 +49,10 @@ define([
 			var config = _.extend({}, {
 				method: 'feed',
 				link: window.location.toString(),
-				name: Config.facebook.name,
-				caption: Config.facebook.caption,
+				name: this.config.facebook.name,
+				caption: this.config.facebook.caption,
 				description: '',
-				picture: Config.baseURL + Config.facebook.picture
+				picture: this.config.baseURL + this.config.facebook.picture
 			}, params);
 
 			Facebook.ui(config, function (response) {
@@ -59,16 +68,16 @@ define([
 		pinterestDialog: function (params) {
 
 			var url = params.url ? escape(params.url): escape(window.location.toString()),
-				media = params.media ? encodeURIComponent(params.media): encodeURIComponent(Config.baseURL + Config.pinterest.media),
-				description = params.description ? encodeURIComponent(params.description): encodeURIComponent(Config.pinterest.description);
+				media = params.media ? encodeURIComponent(params.media): encodeURIComponent(this.config.baseURL + this.config.pinterest.media),
+				description = params.description ? encodeURIComponent(params.description): encodeURIComponent(this.config.pinterest.description);
 
 			var config = _.extend({}, {
 				method: 'feed',
 				link: window.location.toString(),
-				name: Config.facebook.name,
-				caption: Config.facebook.caption,
+				name: this.config.facebook.name,
+				caption: this.config.facebook.caption,
 				description: '',
-				picture: Config.baseURL + Config.facebook.picture
+				picture: this.config.baseURL + this.config.facebook.picture
 			}, params);
 
 			window.open('http://pinterest.com/pin/create/button/?url=' + url + '&media=' + media + '&description=' + description, '_blank', 'width=650,height=400');

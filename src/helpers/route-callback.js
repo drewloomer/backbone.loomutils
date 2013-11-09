@@ -1,7 +1,8 @@
 /*global define*/
-'use strict';
 
 define(['underscore'], function (_) {
+
+	'use strict';
 
 	var RouteCallback = function () {
 
