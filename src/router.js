@@ -95,5 +95,5 @@ define([
 		}
 	});
 
-	return new R();
+	return R;
 });

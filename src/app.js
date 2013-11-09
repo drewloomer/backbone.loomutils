@@ -63,5 +63,5 @@ define([
 	});
 
 
-	return new App();
+	return App;
 });
