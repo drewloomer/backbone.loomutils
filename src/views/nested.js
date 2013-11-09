@@ -4,7 +4,7 @@ define([
 	'jquery',
 	'underscore',
 	'handlebars',
-	'loomutils/router',
+	'router',
 	'epoxy',
 	'loomutils/helpers/loader',
 	'loomutils/helpers/route-callback',
