@@ -8,8 +8,9 @@ define([
 	'epoxy',
 	'loomutils/helpers/loader',
 	'loomutils/helpers/route-callback',
-	'loomutils/models/view'
-], function ($, _, Handlebars, router, Epoxy, Loader, RouteCallback, ViewModel) {
+	'loomutils/models/view',
+	'loomutils/helpers/logger'
+], function ($, _, Handlebars, router, Epoxy, Loader, RouteCallback, ViewModel, logger) {
 
 	'use strict';
 
@@ -518,8 +519,33 @@ define([
 			}
 
 
+			// Any of the child properties that are functions should be interpreted now
+			this.children = _.map(this.children, this._parseChildProperties, this);
+
+
 			// Loop through 'em all, let God sort 'em out
 			_.each(this.children, childrenCollection.addFromDefinition, childrenCollection);
+		},
+
+
+		/**
+		 * Parse child properties that are functions
+		 * @param {Object} child
+		 */
+		_parseChildProperties: function (child) {
+
+			var newChild = {};
+
+			_.each(child, function (value, key) {
+				if (typeof value === 'function' && key !== 'view') {
+					newChild[key] = value.call(this);
+				}
+				else {
+					newChild[key] = value;
+				}
+			}, this);
+
+			return newChild;
 		},
 
 

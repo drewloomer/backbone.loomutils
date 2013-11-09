@@ -27,7 +27,7 @@ define([
 		log: function () {
 
 			if (window.console && window.console.log) {
-				window.console.log.apply(window.console, arguments);
+				window.console.log(Array.prototype.slice.call(arguments));
 			}
 		},
 
@@ -38,7 +38,7 @@ define([
 		dir: function () {
 
 			if (window.console && window.console.dir) {
-				window.console.dir.apply(window.console, arguments);
+				window.console.dir(Array.prototype.slice.call(arguments));
 			}
 		}
 	});
