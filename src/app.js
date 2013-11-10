@@ -30,6 +30,13 @@ define([
 
 
 		/**
+		 * Use the push state
+		 * @type {Boolean}
+		 */
+		usePushState: false,
+
+
+		/**
 		 * Initialize the application
 		 */
 		initialize: function () {
@@ -50,13 +57,7 @@ define([
 
 
 			// Start tracking history
-			Backbone.history.start({
-				pushState: false
-			});
-
-
-			// If there is no URI, route to the default
-			if (!Backbone.history.fragment) {
+			if (!Backbone.history.start({pushState: this.usePushState})) {
 				this.router.default();
 			}
 		}

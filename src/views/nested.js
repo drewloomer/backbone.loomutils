@@ -66,6 +66,15 @@ define([
 
 
 		/**
+		 * DOM events
+		 * @type {Object}
+		 */
+		events: {
+			'click [data-link]': 'linkElement'
+		},
+
+
+		/**
 		 * Initialize
 		 */
 		initialize: function () {
@@ -576,6 +585,20 @@ define([
 		 */
 		back: function () {
 			window.history.back();
+		},
+
+
+		/**
+		 * Link to a page
+		 * @param {Object} e
+		 */
+		linkElement: function (e) {
+
+			e.preventDefault();
+
+			var href = $(e.currentTarget).attr('href');
+
+			this.router.link(href);
 		}
 	});
 

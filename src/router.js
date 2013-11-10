@@ -35,7 +35,7 @@ define([
 			var def = this.routes[''];
 
 			if (def) {
-				this.navigate(def);
+				this.redirect(def);
 			}
 		},
 
@@ -82,7 +82,12 @@ define([
 		 * @param {String} path
 		 */
 		link: function (path) {
-			this.navigate(path, {trigger: true});
+
+			path = path || this.routes[''];
+
+			if (path) {
+				this.navigate(path, {trigger: true});
+			}
 		},
 
 
@@ -91,7 +96,12 @@ define([
 		 * @param {String} path
 		 */
 		redirect: function (path) {
-			this.navigate(path, {trigger: true, replace: true});
+
+			path = path || this.routes[''];
+
+			if (path) {
+				this.navigate(path, {trigger: true, replace: true});
+			}
 		}
 	});
 
