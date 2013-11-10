@@ -154,7 +154,7 @@ define([
 		routeTo: function (id, route, params) {
 
 			try {
-				var view = this.getChild(id).get('view');
+				var view = this.getChildView(id);
 				view.routes[route].call(view, params);
 			}
 			catch (e) {
@@ -259,6 +259,18 @@ define([
 			var child = this.viewModel.get('children').get(id);
 
 			return child;
+		},
+
+
+		/**
+		 * Get a child's view
+		 * @param {String} id
+		 */
+		getChildView: function (id) {
+
+			var child = this.viewModel.get('children').get(id);
+
+			return child ? child.get('view') : undefined;
 		},
 
 
@@ -460,7 +472,17 @@ define([
 		 */
 		_setupListenerGroup: function (group, name) {
 
-			var obj = name === 'this' ? this : this[name] || undefined;
+			var obj;
+
+			if (name === 'this') {
+				obj = this;
+			}
+			else if (this[name]) {
+				obj = this[name];
+			}
+			else if (this.getChild(name)) {
+				obj = this.getChildView(name)
+			}
 
 			if (!obj) {
 				return;
