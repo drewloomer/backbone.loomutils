@@ -6,8 +6,9 @@ define([
 	'underscore',
 	'facebook',
 	'twitter',
-	'loomutils/helpers/analytics'
-], function ($, Backbone, _, Facebook, Twitter, Analytics) {
+	'loomutils/helpers/analytics',
+	'config'
+], function ($, Backbone, _, Facebook, Twitter, Analytics, config) {
 
 	'use strict';
 
@@ -25,14 +26,19 @@ define([
 
 
 		/**
+		 * Facebook SDK
+		 * @type {Object}
+		 */
+		fb: Facebook,
+
+
+		/**
 		 * Initialize the local storage
 		 */
 		initialize: function () {
 
-			this.config = params.config || {};
-
 			Facebook.init({
-				'appId': this.config.facebook.appID,
+				'appId': config.facebook.appID,
 				'xfbml': true
 			});
 
@@ -97,5 +103,5 @@ define([
 		}
 	});
 
-	return S;
+	return new S();
 });
