@@ -57,7 +57,13 @@ define([
 
 
 			// Start tracking history
-			if (!Backbone.history.start({pushState: this.usePushState})) {
+			Backbone.history.start({
+				pushState: this.usePushState
+			});
+
+
+			// Do we have a route yet?
+			if (!this.router.currentRoute().fragment) {
 				this.router.default();
 			}
 		}
