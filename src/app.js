@@ -58,7 +58,8 @@ define([
 
 			// Start tracking history
 			Backbone.history.start({
-				pushState: this.usePushState
+				pushState: this.usePushState,
+				root: $('base').attr('href') || ''
 			});
 
 
