@@ -149,5 +149,5 @@ define([
 		}
 	});
 
-	return S.initialize();
+	return S;
 });
