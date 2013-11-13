@@ -56,10 +56,14 @@ define([
 			this.view.render();
 
 
+			// Is there a root href?
+			var root = $('base[href]').length ? $('base').attr('href').replace(window.location.protocol+"//"+window.location.host, '') : '';
+
+
 			// Start tracking history
 			Backbone.history.start({
 				pushState: this.usePushState,
-				root: $('base').attr('href') || ''
+				root: root
 			});
 
 
