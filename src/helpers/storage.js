@@ -79,7 +79,7 @@ define([
 				data = this._getCookie(key);
 			}
 
-			return data === null ? null: JSON.parse(data);
+			return data === null ? null: $.parseJSON(data);
 		},
 
 
