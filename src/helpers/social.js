@@ -39,7 +39,8 @@ define([
 
 			Facebook.init({
 				'appId': config.facebook.appID,
-				'xfbml': true
+				'xfbml': true,
+				'status': false
 			});
 
 			return this;
