@@ -33,7 +33,6 @@ define([
 					bindingSources[name] = source;
 				}
 			}, this);
-			console.log(bindingSources);
 
 			this.bindingSources = bindingSources;
 
