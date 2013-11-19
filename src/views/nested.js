@@ -288,7 +288,10 @@ define([
 		 */
 		show: function () {
 
-			this.viewModel.set('active', true, {silent: true});
+			if (this.viewModel.get('active') === false) {
+				this.viewModel.set('active', true);
+				return;
+			}
 			this.$el.addClass('active');
 			this.trigger('show');
 		},
@@ -299,7 +302,10 @@ define([
 		 */
 		hide: function () {
 
-			this.viewModel.set('active', false, {silent: true});
+			if (this.viewModel.get('active') === true) {
+				this.viewModel.set('active', false);
+				return;
+			}
 			this.$el.removeClass('active');
 			this.hideChildren();
 			this.trigger('hide');
