@@ -77,16 +77,16 @@ define([
 		pinterestDialog: function (params) {
 
 			var url = params.url ? escape(params.url): escape(window.location.toString()),
-				media = params.media ? encodeURIComponent(params.media): encodeURIComponent(this.config.baseURL + this.config.pinterest.media),
-				description = params.description ? encodeURIComponent(params.description): encodeURIComponent(this.config.pinterest.description);
+				media = params.media ? encodeURIComponent(params.media): encodeURIComponent(config.baseURL + config.pinterest.media),
+				description = params.description ? encodeURIComponent(params.description): encodeURIComponent(config.pinterest.description);
 
 			var config = _.extend({}, {
 				method: 'feed',
 				link: window.location.toString(),
-				name: this.config.facebook.name,
-				caption: this.config.facebook.caption,
+				name: config.facebook.name,
+				caption: config.facebook.caption,
 				description: '',
-				picture: this.config.baseURL + this.config.facebook.picture
+				picture: config.baseURL + config.facebook.picture
 			}, params);
 
 			window.open('http://pinterest.com/pin/create/button/?url=' + url + '&media=' + media + '&description=' + description, '_blank', 'width=650,height=400');
