@@ -288,7 +288,7 @@ define([
 		 */
 		show: function () {
 
-			this.viewModel.set('active', true);
+			this.viewModel.set('active', true, {silent: true});
 			this.$el.addClass('active');
 			this.trigger('show');
 		},
@@ -299,7 +299,7 @@ define([
 		 */
 		hide: function () {
 
-			this.viewModel.set('active', false);
+			this.viewModel.set('active', false, {silent: true});
 			this.$el.removeClass('active');
 			this.hideChildren();
 			this.trigger('hide');
