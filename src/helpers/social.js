@@ -55,7 +55,7 @@ define([
 
 			params = params || {};
 
-			var config = {
+			var conf = {
 				method: params.method || 'feed',
 				link: params.link || window.location.toString(),
 				name: params.name ? params.name : (config.facebook.name || ''),
@@ -64,7 +64,7 @@ define([
 				picture: params.picture || (config.baseURL + config.facebook.picture)
 			};
 
-			Facebook.ui(config, function (response) {
+			Facebook.ui(conf, function (response) {
 				Analytics.trackSocial('facebook', 'feed dialog', response);
 			});
 		},
