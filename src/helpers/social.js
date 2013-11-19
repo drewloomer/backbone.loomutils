@@ -53,14 +53,16 @@ define([
 		 */
 		facebookDialog: function (params) {
 
-			var config = _.extend({}, {
-				method: 'feed',
-				link: window.location.toString(),
-				name: this.config.facebook.name,
-				caption: this.config.facebook.caption,
-				description: '',
-				picture: this.config.baseURL + this.config.facebook.picture
-			}, params);
+			params = params || {};
+
+			var config = {
+				method: params.method || 'feed',
+				link: params.link || window.location.toString(),
+				name: params.name ? params.name : (config.facebook.name || ''),
+				caption: params.caption ? params.caption : (config.facebook.caption || ''),
+				description: params.description ? params.description : (config.facebook.description || ''),
+				picture: params.picture || (config.baseURL + config.facebook.picture)
+			};
 
 			Facebook.ui(config, function (response) {
 				Analytics.trackSocial('facebook', 'feed dialog', response);
