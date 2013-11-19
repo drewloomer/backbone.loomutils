@@ -454,7 +454,9 @@ define([
 			// Add an event to the router with the name of the route
 			// and have it trigger an event with the name of the route
 			// when that route is called.
-			this.router.route(route, route);
+			if (route !== '*') {
+				this.router.route(route, route);
+			}
 
 
 			// Get before and after callbacks for the routes
@@ -467,7 +469,7 @@ define([
 
 
 			// Add the listener
-			this.listenTo(this.router, 'route:' + route, routeCallback);
+			this.listenTo(this.router, 'route' + (route === '*' ? '' : ':' + route), routeCallback);
 		},
 
 
