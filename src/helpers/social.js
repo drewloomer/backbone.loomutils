@@ -64,9 +64,9 @@ define([
 				picture: params.picture || (config.baseURL + config.facebook.picture)
 			};
 
-			Facebook.ui(conf, function (response) {
+			Facebook.ui(conf, _.bind(function (response) {
 				this.trigger(conf.method + ' dialog', response);
-			});
+			}, this));
 		},
 
 
