@@ -65,6 +65,9 @@ define([
 			};
 
 			Facebook.ui(conf, _.bind(function (response) {
+				if (typeof params.success === 'function') {
+					params.success(response);
+				}
 				this.trigger(conf.method + ' dialog', response);
 			}, this));
 		},
