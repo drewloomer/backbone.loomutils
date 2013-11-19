@@ -57,6 +57,7 @@ define([
 
 			var conf = {
 				method: params.method || 'feed',
+				display: params.display || 'popup',
 				link: params.link || window.location.toString(),
 				name: params.name ? params.name : (config.facebook.name || ''),
 				caption: params.caption ? params.caption : (config.facebook.caption || ''),
