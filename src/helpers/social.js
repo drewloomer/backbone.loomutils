@@ -6,9 +6,8 @@ define([
 	'underscore',
 	'facebook',
 	'twitter',
-	'loomutils/helpers/analytics',
 	'config'
-], function ($, Backbone, _, Facebook, Twitter, Analytics, config) {
+], function ($, Backbone, _, Facebook, Twitter, config) {
 
 	'use strict';
 
@@ -66,7 +65,7 @@ define([
 			};
 
 			Facebook.ui(conf, function (response) {
-				Analytics.trackSocial('facebook', 'feed dialog', response);
+				this.trigger(conf.method + ' dialog', response);
 			});
 		},
 
