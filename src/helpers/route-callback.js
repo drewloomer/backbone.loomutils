@@ -14,7 +14,7 @@ define(['underscore'], function (_) {
 			var i = 0;
 			for (i; i < len; i+=1) {
 				if (typeof callbacks[i] === 'function') {
-					if (callbacks[i](route) === false) {
+					if (callbacks[i](route, arguments) === false) {
 						return false;
 					}
 				}
