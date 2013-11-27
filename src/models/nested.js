@@ -16,7 +16,7 @@ define([
 			if (options && options.recursive === true) {
 				_.each(objects, function (object, key) {
 					if (object && object.toJSON && typeof object.toJSON === 'function') {
-						objects[key] = object.toJSON();
+						objects[key] = object.toJSON(options);
 					}
 				});
 			}
