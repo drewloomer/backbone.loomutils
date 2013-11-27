@@ -10,14 +10,16 @@ define([
 
 	var M = Epoxy.Model.extend({
 
-		toJSON: function () {
+		toJSON: function (recursive) {
 			var objects = Epoxy.Model.prototype.toJSON.apply(this, arguments);
 
-			_.each(objects, function (object, key) {
-				if (object && object.toJSON && typeof object.toJSON === 'function') {
-					objects[key] = object.toJSON();
-				}
-			});
+			if (recursive) {
+				_.each(objects, function (object, key) {
+					if (object && object.toJSON && typeof object.toJSON === 'function') {
+						objects[key] = object.toJSON();
+					}
+				});
+			}
 
 			return objects;
 		}
