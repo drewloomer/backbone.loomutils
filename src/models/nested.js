@@ -10,18 +10,40 @@ define([
 
 	var M = Epoxy.Model.extend({
 
-		toJSON: function (options) {
-			var objects = Epoxy.Model.prototype.toJSON.apply(this, arguments);
+		blacklist: {},
 
-			if (options && options.recursive === true) {
-				_.each(objects, function (object, key) {
+		whitelist: {},
+
+		toJSON: function (options) {
+
+			var json = {};
+
+			options = options || {};
+
+			if (options.mode) {
+				if (this.whitelist[options.mode]) {
+					json = _.pick(_.clone(this.attributes), this.whitelist[options.mode]);
+				}
+				else if (this.blacklist[options.mode]) {
+					json = _.omit(_.clone(this.attributes), this.blacklist[options.mode]);
+				}
+				else {
+					json = _.clone(this.attributes);
+				}
+			}
+			else {
+				json = _.clone(this.attributes);
+			}
+
+			if (options.recursive === true) {
+				_.each(json, function (object, key) {
 					if (object && object.toJSON && typeof object.toJSON === 'function') {
-						objects[key] = object.toJSON(options);
+						json[key] = object.toJSON(options);
 					}
 				});
 			}
 
-			return objects;
+			return json;
 		}
 	});
 
