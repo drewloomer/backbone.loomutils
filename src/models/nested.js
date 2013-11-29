@@ -22,17 +22,17 @@ define([
 
 			if (options.mode) {
 				if (this.whitelist[options.mode]) {
-					json = _.pick(_.clone(this.attributes), this.whitelist[options.mode]);
+					json = _.pick(Epoxy.Model.prototype.toJSON.call(this, options), this.whitelist[options.mode]);
 				}
 				else if (this.blacklist[options.mode]) {
-					json = _.omit(_.clone(this.attributes), this.blacklist[options.mode]);
+					json = _.omit(Epoxy.Model.prototype.toJSON.call(this, options), this.blacklist[options.mode]);
 				}
 				else {
-					json = _.clone(this.attributes);
+					json = Epoxy.Model.prototype.toJSON.call(this, options);
 				}
 			}
 			else {
-				json = _.clone(this.attributes);
+				json = Epoxy.Model.prototype.toJSON.call(this, options);
 			}
 
 			if (options.recursive === true) {
