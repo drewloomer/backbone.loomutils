@@ -249,10 +249,14 @@ define([
 		getData: function () {
 
 			if (this.collection) {
-				return this.collection.toJSON();
+				return this.collection.toJSON({
+					recursive: true
+				});
 			}
 			else if (this.model) {
-				return this.model.toJSON();
+				return this.model.toJSON({
+					recursive: true
+				});
 			}
 
 			return {};
