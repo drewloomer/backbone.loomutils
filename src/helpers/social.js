@@ -54,15 +54,26 @@ define([
 
 			params = params || {};
 
-			var conf = {
-				method: params.method || 'feed',
-				display: params.display || 'popup',
-				link: params.link || window.location.toString(),
-				name: params.name ? params.name : (config.facebook.name || ''),
-				caption: params.caption ? params.caption : (config.facebook.caption || ''),
-				description: params.description ? params.description : (config.facebook.description || ''),
-				picture: params.picture || (config.baseURL + config.facebook.picture)
-			};
+			var method = params.method || 'feed',
+				conf = {};
+
+			if (method === 'send') {
+				conf = {
+					app_id: config.facebook.appID,
+					display: params.display || 'popup',
+					link: params.link || window.location.toString()
+				};
+			}
+			else {
+				conf = {
+					display: params.display || 'popup',
+					link: params.link || window.location.toString(),
+					name: params.name ? params.name : (config.facebook.name || ''),
+					caption: params.caption ? params.caption : (config.facebook.caption || ''),
+					description: params.description ? params.description : (config.facebook.description || ''),
+					picture: params.picture || (config.baseURL + config.facebook.picture)
+				};
+			}
 
 			Facebook.ui(conf, _.bind(function (response) {
 				if (typeof params.success === 'function') {
