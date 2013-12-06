@@ -59,6 +59,7 @@ define([
 
 			if (method === 'send') {
 				conf = {
+					method: method,
 					app_id: config.facebook.appID,
 					display: params.display || 'popup',
 					link: params.link || window.location.toString()
@@ -66,6 +67,7 @@ define([
 			}
 			else {
 				conf = {
+					method: method,
 					display: params.display || 'popup',
 					link: params.link || window.location.toString(),
 					name: params.name ? params.name : (config.facebook.name || ''),
