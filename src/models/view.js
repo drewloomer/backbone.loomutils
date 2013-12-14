@@ -62,7 +62,7 @@ define([
 		 */
 		activeChild: function (role) {
 			return this.get('children').active(role || 'primary');
-		}
+		},
 
 
 		/**
