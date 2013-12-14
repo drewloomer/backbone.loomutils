@@ -33,6 +33,20 @@ define([
 
 
 		/**
+		 * Computed properites
+		 * @type {Object}
+		 */
+		computeds: {
+			activeChild: {
+				deps: ['children'],
+				get: function (children) {
+					return children.active(role);
+				}
+			}
+		},
+
+
+		/**
 		 * Initialize
 		 */
 		initialize: function () {
@@ -42,15 +56,6 @@ define([
 				loader: false,
 				children: false
 			});
-		},
-
-
-		/**
-		 * Find the active child in a role
-		 * @param {String} role
-		 */
-		active: function (role) {
-			return this.get('children').active(role);
 		},
 
 
