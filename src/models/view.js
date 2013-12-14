@@ -46,6 +46,15 @@ define([
 
 
 		/**
+		 * Find the active child in a role
+		 * @param {String} role
+		 */
+		active: function (role) {
+			return this.get('children').active(role);
+		},
+
+
+		/**
 		 * Triggered by the view on load
 		 */
 		onLoaded: function () {
@@ -118,6 +127,23 @@ define([
 
 			// Add the model to the collection
 			this.add(viewModel);
+		},
+
+
+		/**
+		 * Get the child active in a role
+		 * @return {Object}
+		 */
+		active: function (role) {
+
+			if (!role) {
+				return;
+			}
+
+			return this.findWhere({
+				active: true,
+				role: role
+			});
 		}
 	});
 

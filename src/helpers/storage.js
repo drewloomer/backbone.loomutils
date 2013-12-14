@@ -40,7 +40,7 @@ define([
 		set: function (key, val) {
 
 			// Loop through objects
-			if (typeof key === 'array') {
+			if (_.isArray(key)) {
 				_.each(key, function(v, k) {
 					this.set(k, v);
 				});
