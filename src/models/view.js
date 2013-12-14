@@ -37,11 +37,8 @@ define([
 		 * @type {Object}
 		 */
 		computeds: {
-			activeChild: {
-				deps: ['children'],
-				get: function (children) {
-					return children.active(role);
-				}
+			activeChild: function (children) {
+				return this.activeChild();
 			}
 		},
 
@@ -57,6 +54,15 @@ define([
 				children: false
 			});
 		},
+
+
+		/**
+		 * Get the active child for a role
+		 * @param {String} role
+		 */
+		activeChild: function (role) {
+			return this.get('children').active(role || 'primary');
+		}
 
 
 		/**
