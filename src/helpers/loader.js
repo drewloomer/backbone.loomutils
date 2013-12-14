@@ -197,18 +197,30 @@ define([
 		 */
 		loadStylesheet: function (stylesheet) {
 
-			var re = /\.\.\/(images\/[^)]+)/gi,
-				match,
-				src;
+			// Match the path so we can load relative images
+			var pathDetails = this._getFilePathDetails(stylesheet);
 
+
+			// Get the stylesheet
 			$.get(stylesheet).done(_.bind(function (data) {
-				match = re.exec(data);
 
-				while (match) {
-					src = match[1];
-					this.loadImage(src);
-					match = re.exec(data);
-				}
+				// Array of matches
+				var re = /(url\(("|'|))([^)'"]+)(("|'|)\))/gi,
+					matches = data.match(re);
+
+
+				// Loop through the matches
+				_.each(matches, function (match) {
+
+					// Find each src
+					var re = /(url\(("|'|))([^)'"]+)(("|'|)\))/i,
+						subMatch = match.match(re);
+
+					if (subMatch.length && subMatch[3]) {
+						var file = pathDetails.path + subMatch[3];
+						this.loadImage(file);
+					}
+				}, this);
 			}, this));
 		},
 
@@ -219,6 +231,35 @@ define([
 		loadStylesheets: function () {
 
 			_.each(this.get('stylesheets'), this.loadStylesheet, this);
+		},
+
+
+		/**
+		 * Get the path to a file
+		 * @param {String} url
+		 * @return {Object}
+		 */
+		_getFilePathDetails: function (url) {
+
+			var isRelative = url.search(/(http:\/\/|https:\/\/|\/\/)/i) === -1,
+				directories = isRelative ? url.split('/') : url.match(/([^\/]{1,})/gi),
+				directoriesDepth = isRelative ? directories.length - 1 : directories.length - 2,
+				path = '',
+				i = 0;
+
+
+			// Add the path pieces
+			for (i; i < directoriesDepth; i+=1) {
+				path = path + directories[i] + '/';
+			}
+
+
+			return {
+				isRelative: isRelative,
+				directories: directories,
+				directoriesDepth: directoriesDepth,
+				path: path
+			};
 		},
 
 

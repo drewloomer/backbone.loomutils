@@ -344,6 +344,17 @@ define([
 
 
 		/**
+		 * Hide a child
+		 */
+		hideChild: function (id) {
+
+			var child = typeof id !== 'object' ? this.getChild(id) : id;
+
+			child.set('active', false);
+		},
+
+
+		/**
 		 * Hide all the children (called when we hide this view)
 		 */
 		hideChildren: function () {
