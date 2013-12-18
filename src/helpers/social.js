@@ -6,8 +6,8 @@ define([
 	'underscore',
 	'facebook',
 	'twitter',
-	'config'
-], function ($, Backbone, _, Facebook, Twitter, config) {
+	'googleplus'
+], function ($, Backbone, _, Facebook, twitter, googlePlus) {
 
 	'use strict';
 
@@ -36,8 +36,12 @@ define([
 		 */
 		initialize: function () {
 
+			params = params || {};
+
+			this.config = params.config || {};
+
 			Facebook.init({
-				'appId': config.facebook.appID,
+				'appId': this.config.facebook.appID,
 				'xfbml': true,
 				'status': false
 			});
@@ -60,7 +64,7 @@ define([
 			if (method === 'send') {
 				conf = {
 					method: method,
-					app_id: config.facebook.appID,
+					app_id: this.config.facebook.appID,
 					display: params.display || 'popup',
 					link: params.link || window.location.toString()
 				};
@@ -70,10 +74,10 @@ define([
 					method: method,
 					display: params.display || 'popup',
 					link: params.link || window.location.toString(),
-					name: params.name ? params.name : (config.facebook.name || ''),
-					caption: params.caption ? params.caption : (config.facebook.caption || ''),
-					description: params.description ? params.description : (config.facebook.description || ''),
-					picture: params.picture || (config.baseURL + config.facebook.picture)
+					name: params.name ? params.name : (this.config.facebook.name || ''),
+					caption: params.caption ? params.caption : (this.config.facebook.caption || ''),
+					description: params.description ? params.description : (this.config.facebook.description || ''),
+					picture: params.picture || (this.config.baseURL + this.config.facebook.picture)
 				};
 			}
 
@@ -96,16 +100,18 @@ define([
 				media = params.media ? encodeURIComponent(params.media): encodeURIComponent(config.baseURL + config.pinterest.media),
 				description = params.description ? encodeURIComponent(params.description): encodeURIComponent(config.pinterest.description);
 
-			var config = _.extend({}, {
-				method: 'feed',
-				link: window.location.toString(),
-				name: config.facebook.name,
-				caption: config.facebook.caption,
-				description: '',
-				picture: config.baseURL + config.facebook.picture
-			}, params);
-
 			window.open('http://pinterest.com/pin/create/button/?url=' + url + '&media=' + media + '&description=' + description, '_blank', 'width=650,height=400');
+		},
+
+
+		/**
+		 * Post via Google+
+		 */
+		googlePlusPost: function (params) {
+
+			var url = params.url ? escape(params.url): escape(window.location.toString());
+
+			window.open('https://plus.google.com/share?url=' + url + '&hl=en-US', '_blank', 'width=650,height=400');
 		},
 
 
@@ -122,5 +128,5 @@ define([
 		}
 	});
 
-	return new S();
+	return S;
 });
