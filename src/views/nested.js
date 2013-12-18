@@ -80,7 +80,7 @@ define([
 		initialize: function () {
 
 			// New model instance
-			this.viewModel = new ViewModel();
+			this.viewModel = this.viewModel || new ViewModel();
 
 
 			// Listen to viewModel changes
