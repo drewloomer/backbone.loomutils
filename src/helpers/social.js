@@ -5,9 +5,8 @@ define([
 	'backbone',
 	'underscore',
 	'facebook',
-	'twitter',
-	'googleplus'
-], function ($, Backbone, _, Facebook, twitter, googlePlus) {
+	'twitter'
+], function ($, Backbone, _, Facebook, twitter) {
 
 	'use strict';
 
