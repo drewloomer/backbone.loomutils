@@ -34,7 +34,7 @@ define([
 		/**
 		 * Initialize the local storage
 		 */
-		initialize: function () {
+		initialize: function (params) {
 
 			params = params || {};
 
