@@ -28,7 +28,7 @@ define([
 			replace: false,
 			rendered: false,
 			children: undefined,
-			default: undefined
+			defaultChild: undefined
 		},
 
 
@@ -128,7 +128,7 @@ define([
 				target: target,
 				replace: child.replace,
 				role: child.role || '',
-				default: child.default
+				defaultChild: child.defaultChild
 			});
 
 

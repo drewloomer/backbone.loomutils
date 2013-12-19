@@ -69,7 +69,7 @@ define([
 
 			// Do we have a route yet?
 			if (!this.router.currentRoute().fragment) {
-				this.router.default();
+				this.router.defaultRoute();
 			}
 		}
 	});

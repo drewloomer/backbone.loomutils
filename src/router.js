@@ -30,7 +30,7 @@ define([
 		/**
 		 * Navigate to the default route
 		 */
-		default: function () {
+		defaultRoute: function () {
 
 			var def = this.routes[''];
 

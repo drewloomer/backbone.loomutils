@@ -321,7 +321,7 @@ define([
 		 */
 		showDefaultChild: function () {
 
-			var child = this.viewModel.get('children').findWhere({default: true});
+			var child = this.viewModel.get('children').findWhere({defaultChild: true});
 
 			if (child) {
 				this.showChild(child);
