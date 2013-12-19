@@ -30,6 +30,8 @@ define([
 		 */
 		initialize: function (params) {
 
+			params = params || {};
+
 			this.config = params.config || {};
 
 			window._gaq = window._gaq || [];
