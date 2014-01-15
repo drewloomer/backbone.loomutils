@@ -431,7 +431,7 @@ define([
 
 					var children = this.viewModel.get('children').where({role: viewModel.get('role')});
 					_.each(children, function (c) {
-						if (c !== viewModel) {
+						if (c !== viewModel && c.get('active')) {
 							c.get('view').hide();
 						}
 					});
