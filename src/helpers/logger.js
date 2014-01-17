@@ -1,8 +1,9 @@
 /*global define*/
 
 define([
-	'underscore'
-], function (_) {
+	'underscore',
+	'config'
+], function (_, config) {
 
 	'use strict';
 
@@ -26,7 +27,7 @@ define([
 		 */
 		log: function () {
 
-			if (window.console && window.console.log) {
+			if (window.console && window.console.log && (!config || config.loggingEnabled !== false)) {
 				window.console.log(Array.prototype.slice.call(arguments));
 			}
 		},
@@ -37,7 +38,7 @@ define([
 		 */
 		dir: function () {
 
-			if (window.console && window.console.dir) {
+			if (window.console && window.console.dir && (!config || config.loggingEnabled !== false)) {
 				window.console.dir(Array.prototype.slice.call(arguments));
 			}
 		}

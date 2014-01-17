@@ -167,7 +167,7 @@ define([
 				view.routes[route].call(view, params);
 			}
 			catch (e) {
-				console.log('Failed to route "' + route + '" on child "' + id + '"');
+				// console.log('Failed to route "' + route + '" on child "' + id + '"');
 			}
 		},
 
