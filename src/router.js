@@ -99,13 +99,16 @@ define([
 		 */
 		link: function (path, noTrack) {
 
-			if (noTrack !== false) {
+			if (this.knownHistory.length === 0) {
 				this.knownHistory.push(this.current());
 			}
 
 			path = path || this.routes[''];
 
 			if (path) {
+				if (noTrack !== false) {
+					this.knownHistory.push(path);
+				}
 				this.navigate(path, {trigger: true});
 			}
 		},
@@ -118,13 +121,16 @@ define([
 		 */
 		redirect: function (path, noTrack) {
 
-			if (noTrack !== false) {
+			if (this.knownHistory.length === 0) {
 				this.knownHistory.push(this.current());
 			}
 
 			path = path || this.routes[''];
 
 			if (path) {
+				if (noTrack !== false) {
+					this.knownHistory.push(path);
+				}
 				this.navigate(path, {trigger: true, replace: true});
 			}
 		}
