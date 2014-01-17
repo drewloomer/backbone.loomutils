@@ -429,7 +429,7 @@ define([
 				// First, hide other children in that region
 				if (viewModel.get('role')) {
 
-					var children = this.viewModel.get('children').where({role: viewModel.get('role')});
+					var children = this.viewModel.get('children').where({role: viewModel.get('role'), active: true});
 					_.each(children, function (c) {
 						if (c !== viewModel && c.get('active')) {
 							c.get('view').hide();

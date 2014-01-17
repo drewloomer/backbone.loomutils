@@ -19,6 +19,13 @@ define([
 
 
 		/**
+		 * History of known routes
+		 * @type {Array}
+		 */
+		knownHistory: [],
+
+
+		/**
 		 * Initialize the router
 		 */
 		initialize: function () {
@@ -78,10 +85,20 @@ define([
 
 
 		/**
+		 * Get the previous route fragment
+		 */
+		previous: function () {
+			return _.last(this.knownHistory);
+		},
+
+
+		/**
 		 * Redirect the user to a route. Same as navigate but with a guaranteed trigger.
 		 * @param {String} path
 		 */
 		link: function (path) {
+
+			this.knownHistory.push(this.current());
 
 			path = path || this.routes[''];
 
@@ -96,6 +113,8 @@ define([
 		 * @param {String} path
 		 */
 		redirect: function (path) {
+
+			this.knownHistory.push(this.current());
 
 			path = path || this.routes[''];
 
