@@ -95,10 +95,13 @@ define([
 		/**
 		 * Redirect the user to a route. Same as navigate but with a guaranteed trigger.
 		 * @param {String} path
+		 * @param {Boolean} noTrack
 		 */
-		link: function (path) {
+		link: function (path, noTrack) {
 
-			this.knownHistory.push(this.current());
+			if (noTrack !== false) {
+				this.knownHistory.push(this.current());
+			}
 
 			path = path || this.routes[''];
 
@@ -111,10 +114,13 @@ define([
 		/**
 		 * Redirect the user to a route. Same as navigate but with a guaranteed trigger.
 		 * @param {String} path
+		 * @param {Boolean} noTrack
 		 */
-		redirect: function (path) {
+		redirect: function (path, noTrack) {
 
-			this.knownHistory.push(this.current());
+			if (noTrack !== false) {
+				this.knownHistory.push(this.current());
+			}
 
 			path = path || this.routes[''];
 
