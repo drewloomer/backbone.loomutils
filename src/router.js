@@ -29,7 +29,7 @@ define([
 		 * Is this enabled?
 		 * @type {Boolean}
 		 */
-		enabled: false,
+		enabled: true,
 
 
 		/**
