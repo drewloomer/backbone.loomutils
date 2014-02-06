@@ -26,6 +26,13 @@ define([
 
 
 		/**
+		 * Is this enabled?
+		 * @type {Boolean}
+		 */
+		enabled: false,
+
+
+		/**
 		 * Initialize the router
 		 */
 		initialize: function () {
@@ -99,6 +106,10 @@ define([
 		 */
 		link: function (path, noTrack) {
 
+			if (!this.enabled) {
+				return;
+			}
+
 			if (this.knownHistory.length === 0) {
 				this.knownHistory.push(this.current());
 			}
@@ -121,6 +132,10 @@ define([
 		 */
 		redirect: function (path, noTrack) {
 
+			if (!this.enabled) {
+				return;
+			}
+			
 			if (this.knownHistory.length === 0) {
 				this.knownHistory.push(this.current());
 			}
