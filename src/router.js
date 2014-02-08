@@ -55,6 +55,23 @@ define([
 
 
 		/**
+		 * Navigate override to maintain a history
+		 * @param {String} route
+		 * @param {Object} options
+		 */
+		navigate: function (route, options) {
+
+			var noTrack = options.noTrack || undefined;
+
+			if (noTrack !== false) {
+				this.knownHistory.push(route);
+			}
+
+			Backbone.Router.prototype.navigate.apply(this, arguments);
+		},
+
+
+		/**
 		 * Get the current route
 		 */
 		currentRoute: function() {
@@ -117,10 +134,7 @@ define([
 			path = path || this.routes[''];
 
 			if (path) {
-				if (noTrack !== false) {
-					this.knownHistory.push(path);
-				}
-				this.navigate(path, {trigger: true});
+				this.navigate(path, {trigger: true, noTrack: noTrack});
 			}
 		},
 
@@ -143,10 +157,7 @@ define([
 			path = path || this.routes[''];
 
 			if (path) {
-				if (noTrack !== false) {
-					this.knownHistory.push(path);
-				}
-				this.navigate(path, {trigger: true, replace: true});
+				this.navigate(path, {trigger: true, replace: true, noTrack: noTrack});
 			}
 		}
 	});
