@@ -26,6 +26,14 @@ define([
 
 
 		/**
+		 * If the last route was supposed to not be tracked, store it here so
+		 * that we don't accidentally track it in the loadUrl override
+		 * @type {String}
+		 */
+		lastUntracked: null,
+
+
+		/**
 		 * Is this enabled?
 		 * @type {Boolean}
 		 */
@@ -55,16 +63,35 @@ define([
 
 
 		/**
+		 * Load URL override to store history of all fragments, not just those called internally
+		 * @param {String} fragment [description]
+		 */
+		loadUrl: function (fragment) {
+
+			// Don't add a duplicate and don't add something that is supposed to be untracked
+			if (this.previous() !== fragment && this.lastUntracked !== fragment) {
+				this.knownHistory.push(fragment);
+			}
+
+			Backbone.Router.prototype.loadUrl.apply(this, arguments);
+		},
+
+
+		/**
 		 * Navigate override to maintain a history
-		 * @param {String} route
+		 * @param {String} fragment
 		 * @param {Object} options
 		 */
-		navigate: function (route, options) {
+		navigate: function (fragment, options) {
 
 			var noTrack = options.noTrack || undefined;
 
 			if (noTrack !== false) {
-				this.knownHistory.push(route);
+				this.knownHistory.push(fragment);
+				this.lastUntracked = null;
+			}
+			else {
+				this.lastUntracked = fragment;
 			}
 
 			Backbone.Router.prototype.navigate.apply(this, arguments);
