@@ -45,7 +45,7 @@ define([
 		 */
 		initialize: function () {
 
-
+			this.on('route', this.onRoute);
 		},
 
 
@@ -59,21 +59,6 @@ define([
 			if (def) {
 				this.redirect(def);
 			}
-		},
-
-
-		/**
-		 * Load URL override to store history of all fragments, not just those called internally
-		 * @param {String} fragment [description]
-		 */
-		loadUrl: function (fragment) {
-
-			// Don't add a duplicate and don't add something that is supposed to be untracked
-			if (this.previous() !== fragment && this.lastUntracked !== fragment) {
-				this.knownHistory.push(fragment);
-			}
-
-			Backbone.Router.prototype.loadUrl.apply(this, arguments);
 		},
 
 
@@ -185,6 +170,19 @@ define([
 
 			if (path) {
 				this.navigate(path, {trigger: true, replace: true, noTrack: noTrack});
+			}
+		},
+
+
+		/**
+		 * Store history of all fragments, not just those called internally
+		 * @param {String} fragment [description]
+		 */
+		onRoute: function (fragment) {
+
+			// Don't add a duplicate and don't add something that is supposed to be untracked
+			if (this.previous() !== fragment && this.lastUntracked !== fragment) {
+				this.knownHistory.push(fragment);
 			}
 		}
 	});
